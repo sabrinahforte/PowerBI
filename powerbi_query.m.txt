@@ -1,0 +1,8 @@
+let
+    Fonte = GoogleSheets.Contents("colocar link da sua planilha"),
+    AuthBling_Table = Fonte{[name="AuthBling",ItemKind="Table"]}[Data],
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(AuthBling_Table, [PromoteAllScalars=true]),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ID Empresa", type text}, {"Empresas", type text}, {"Usuarios", type text}, {"Senhas", type text}, {"Cliente ID", type text}, {"Cliente Secret", type text}, {"Code", type text}, {"RefreshToken", type text}, {"Token", type text}}),
+    Token = #"Tipo Alterado"{0}[Token]
+in
+    Token
